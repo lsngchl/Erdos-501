@@ -1,0 +1,418 @@
+% This file was assembled from main.tex and manuscript inputs.
+% Generated on 2026-05-30.
+
+\documentclass{amsart}
+
+%\usepackage[a4paper,margin=30mm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage[colorlinks=true,citecolor=blue,urlcolor=blue]{hyperref}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Pc}{\mathcal{P}}
+\newcommand{\Lc}{\mathcal{L}}
+\newcommand{\ZFC}{\mathsf{ZFC}}
+\newcommand{\FMEA}{\mathsf{FMEA}}
+\newcommand{\CH}{\mathsf{CH}}
+\newcommand{\Con}{\operatorname{Con}}
+\newcommand{\add}{\operatorname{add}}
+
+\title{Relative Independence of Erd\H{o}s Problem \#501}
+\author{Sungchul Lee}
+\date{\today}
+
+\begin{document}
+
+\begin{abstract}
+We prove a strengthening of the positive assertion in Erd\H{o}s problem \#501 assuming that Lebesgue measure extends to a measure on all subsets of $\R$.
+Together with Hechler's counterexample under the continuum hypothesis, this gives a relative independence result for Erd\H{o}s problem \#501, relative to the consistency of this extension hypothesis, and hence relative to the consistency of a measurable cardinal.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $m$ denote Lebesgue measure on $\R$, and let $m^*$ denote Lebesgue outer measure.
+Erd\H{o}s problem \#501 \cite{ErdosProblems501} asks whether every family $(A_x)_{x\in\R}$ of bounded subsets of $\R$ with $m^*(A_x)<1$ admits an infinite independent set, that is, an infinite set $X\subseteq\R$ such that $x\notin A_y$ whenever $x,y\in X$ are distinct.
+We write $P$ for the affirmative answer to this question.
+
+Erd\H{o}s and Hajnal \cite{ErdosHajnal1960} proved the existence of arbitrarily large finite independent sets.
+Hechler \cite{Hechler1972} proved $\neg P$ under the assumption $\CH$.
+Newelski, Pawlikowski, and Seredy\'nski \cite{NPS1987} proved that if all sets $A_y$ are closed and have measure $<1$, then there is an infinite independent set.
+However, it remained open whether $\neg P$ can be proved without assuming $\CH$.
+
+Let $\FMEA$ denote the Full Measure Extension Axiom, the assertion that Lebesgue measure has an extension to a measure on all subsets of $\R$.
+Our main result is the following.
+
+\begin{theorem}\label{thm:main}
+Assume $\ZFC+\FMEA$.
+Every family $(A_y)_{y\in\R}$ of subsets of $\R$ with Lebesgue outer measure $<1$ admits an infinite independent set.
+\end{theorem}
+
+Note that Theorem \ref{thm:main} does not assume boundedness.
+Hence Theorem \ref{thm:main} implies $P$ under $\FMEA$.
+$\FMEA$ is equiconsistent with the existence of a measurable cardinal; see \cite[1D(e), 2E]{FremlinRVM}.
+Combining Theorem \ref{thm:main} with Hechler's theorem gives the following consequence.
+
+\begin{corollary}\label{cor:relative-independence}
+If $\Con(\ZFC+\FMEA)$ holds, then $P$ is independent of $\ZFC$.
+In particular, if $\ZFC$ with a measurable cardinal is consistent, then $P$ is independent of $\ZFC$.
+\end{corollary}
+
+The key ingredient of the proof is Theorem \ref{thm:kunen}, which gives a Fubini-type inequality for arbitrary subsets of $\R^2$.
+This makes it possible to handle arbitrary sets $A_y$, without assuming, for instance, that they are closed.
+
+\subsection*{Notation}
+
+For a set $X$, we write $\Pc(X)$ to denote its power set.
+$\R^{<\omega}$ denotes the set of all finite sequences of real numbers; a sequence $s\in\R^{<\omega}$ of length $n$ is a function from $\{0,\ldots,n-1\}$ to $\R$.
+
+\section{Proof of the Main Theorem}\label{sec:main-theorem-proof}
+
+This section proves Theorem \ref{thm:main} from Lemma \ref{lem:key-selection}.
+We first state Lemma \ref{lem:key-selection}, postponing its proof to a later section, and then show how Theorem \ref{thm:main} follows from it.
+
+If $\nu:\Pc(\R)\to[0,\infty]$ is a measure extending Lebesgue measure, then every set $S\subseteq\R$ satisfies
+\begin{equation}\label{eq:outer-measure-domination}
+\nu(S)\le m^*(S).
+\end{equation}
+Indeed, this follows by covering $S$ by countably many open intervals and taking the infimum over all such covers.
+In particular, if $m^*(S)<1$, then $\nu(S)<1$.
+
+For a family $(A_y)_{y\in\R}$ of subsets of $\R$, write $B_x=\{y\in\R:x\in A_y\}$ for $x\in\R$.
+
+\begin{lemma}\label{lem:key-selection}
+Let $\nu:\Pc(\R)\to[0,\infty]$ be a measure extending Lebesgue measure.
+Let $(A_y)_{y\in\R}$ be a family of subsets of $\R$ such that $m^*(A_y)<1$ for every $y\in\R$.
+If $C\subseteq\R$ and $\nu(C)=\infty$, then there is an $x\in C$ such that $\nu(C\setminus B_x)=\infty$.
+\end{lemma}
+
+\begin{proof}[Proof of Theorem \ref{thm:main}]
+Assume $\FMEA$, and fix a measure $\nu:\Pc(\R)\to[0,\infty]$ extending Lebesgue measure.
+Let $(A_y)_{y\in\R}$ satisfy $m^*(A_y)<1$ for every $y\in\R$.
+Fix a well-ordering $\preceq$ of $\R$ and a point $r_0\in\R$.
+
+For a finite sequence $s\in\R^{<\omega}$, define
+\begin{equation}\label{eq:definition-of-Cs}
+C_s
+=
+\R\setminus\bigcup_{i<|s|}\left(A_{s(i)}\cup B_{s(i)}\cup\{s(i)\}\right),
+\end{equation}
+where $|s|$ denotes the length of $s$.
+Let
+\begin{equation}\label{eq:definition-of-Qs}
+Q_s
+=
+\{a\in C_s:\nu(C_s\setminus B_a)=\infty\}.
+\end{equation}
+Define $G:\R^{<\omega}\to\R$ by
+\[
+G(s)=
+\begin{cases}
+\text{the $\preceq$-least element of $Q_s$}, & Q_s\ne\varnothing,\\
+r_0, & Q_s=\varnothing.
+\end{cases}
+\]
+We write $f\upharpoonright n$ for the restriction of $f$ to $\{0,\ldots,n-1\}$.
+By recursion on $\omega$, there exists $f:\omega\to\R$ such that
+\[
+f(n)=G(f\upharpoonright n)
+\qquad(n<\omega).
+\]
+
+We prove by induction that
+\[
+\nu(C_{f\upharpoonright n})=\infty
+\qquad(n<\omega).
+\]
+For $n=0$, $f\upharpoonright 0$ is the empty sequence, so $C_{f\upharpoonright 0}=\R$ and $\nu(C_{f\upharpoonright 0})=\infty$.
+Suppose $\nu(C_{f\upharpoonright n})=\infty$.
+Lemma \ref{lem:key-selection} applied to $C_{f\upharpoonright n}$ and \eqref{eq:definition-of-Qs} show that $Q_{f\upharpoonright n}$ is nonempty.
+Hence $f(n)=G(f\upharpoonright n)$ belongs to $C_{f\upharpoonright n}$ and satisfies
+\[
+\nu(C_{f\upharpoonright n}\setminus B_{f(n)})=\infty.
+\]
+Moreover, by \eqref{eq:definition-of-Cs},
+\[
+C_{f\upharpoonright(n+1)}
+=
+C_{f\upharpoonright n}\setminus\left(A_{f(n)}\cup B_{f(n)}\cup\{f(n)\}\right)
+=
+(C_{f\upharpoonright n}\setminus B_{f(n)})\setminus\left(A_{f(n)}\cup\{f(n)\}\right).
+\]
+By \eqref{eq:outer-measure-domination},
+\[
+\nu(A_{f(n)})\le m^*(A_{f(n)})<1,
+\]
+and $\nu(\{f(n)\})=0$ because $\nu$ extends Lebesgue measure.
+Thus $\nu(A_{f(n)}\cup\{f(n)\})<\infty$.
+Since $\nu(C_{f\upharpoonright n}\setminus B_{f(n)})=\infty$ and $\nu(A_{f(n)}\cup\{f(n)\})<\infty$, we have $\nu(C_{f\upharpoonright(n+1)})=\infty$.
+This completes the induction.
+
+Set $X=\{f(n):n<\omega\}$.
+Let $i<j$.
+By \eqref{eq:definition-of-Cs},
+\[
+f(j)\in C_{f\upharpoonright j}\subseteq C_{f\upharpoonright(i+1)}
+=C_{f\upharpoonright i}\setminus\left(A_{f(i)}\cup B_{f(i)}\cup\{f(i)\}\right),
+\]
+we have $f(j)\ne f(i)$, $f(j)\notin A_{f(i)}$, and $f(j)\notin B_{f(i)}$.
+The last relation is equivalent to $f(i)\notin A_{f(j)}$.
+Thus $X$ is infinite, and $x\notin A_y$ for all distinct $x,y\in X$.
+\end{proof}
+
+\section{Proof of Lemma \ref{lem:key-selection}}\label{sec:key-selection}
+
+We use the following theorem of Kunen \cite[543C]{FremlinVol5Ch54}.
+For a topological space $X$, $w(X)$ is the least cardinality of a base for the topology of $X$.
+For a measure $\nu$, define $\add(\nu)$ as in \cite[511G(a)]{FremlinVol5Ch51}.
+\begin{theorem}\label{thm:kunen}
+Suppose that $(Y,\Pc(Y),\nu)$ is a $\sigma$-finite measure space and that $(X,\mathcal T,\Sigma,\mu)$ is a $\sigma$-finite quasi-Radon measure space\footnote{See \cite[411H(a)]{FremlinVol4Ch41} for the definition.} with $w(X)<\add(\nu)$.
+Then every function $F:X\times Y\to[0,\infty]$ satisfies
+\begin{equation}\label{eq:fremlin-kunen}
+\overline{\int_X}\int_Y F(x,y)\,d\nu(y)\,d\mu(x)
+\le
+\int_Y \overline{\int_X} F(x,y)\,d\mu(x)\,d\nu(y).
+\end{equation}
+\end{theorem}
+
+For the measure $\nu$ in Lemma \ref{lem:key-selection}, $(\R,\Pc(\R),\nu)$ is $\sigma$-finite and $(\R,\Lc,m)$ is a $\sigma$-finite quasi-Radon measure space, where $\Lc$ denotes the $\sigma$-algebra of Lebesgue measurable subsets of $\R$.
+Moreover, $\R$ has a countable base, while countable additivity of $\nu$ gives
+\[
+w(\R)=\omega<\add(\nu).
+\]
+Applying Theorem \ref{thm:kunen} to the indicator of any $H\subset\R^2$, we get
+\begin{equation}\label{eq:section-inequality}
+\overline{\int_\R}\nu(H_x)\,dm(x)
+\le
+\int_\R m^*(H^y)\,d\nu(y),
+\end{equation}
+where
+\[
+H_x=\{y\in\R:(x,y)\in H\},
+\qquad
+H^y=\{x\in\R:(x,y)\in H\}.
+\]
+Here $\overline{\int_\R} g\,dm$ denotes the Lebesgue upper integral; that is, for $g:\R\to[0,\infty]$,
+\[
+\overline{\int_\R} g\,dm
+=
+\inf\left\{\int_\R h\,dm:g\le h,\ h\text{ is Lebesgue measurable}\right\}.
+\]
+
+We now prove Lemma \ref{lem:key-selection}.
+Let $C\subseteq\R$ satisfy $\nu(C)=\infty$.
+Suppose, toward a contradiction, that
+\begin{equation}\label{eq:contrary}
+\nu(C\setminus B_x)<\infty,
+\qquad
+\forall x\in C.
+\end{equation}
+
+For $N\ge1$, put $C_N=C\cap[-N,N]$.
+Since $C=\bigcup_{N\ge1}C_N$ and the sequence $(C_N)_{N\ge1}$ is increasing, continuity from below gives
+\begin{equation}\label{eq:CN-to-infinity}
+\nu(C_N)\longrightarrow\infty.
+\end{equation}
+Choose $N$ such that $D:=C\cap[-N,N]$ satisfies $\nu(D)>1$.
+For $k\ge1$, define
+\begin{equation}\label{eq:definition-of-Dk}
+D_k=\{x\in D:\nu(C\setminus B_x)\le k\}.
+\end{equation}
+By \eqref{eq:contrary}, $D=\bigcup_{k\ge1}D_k$, and the sequence $(D_k)_{k\ge1}$ is increasing.
+Again by continuity from below, there is $k\ge1$ such that $\nu(D_k)>1$.
+By \eqref{eq:outer-measure-domination},
+\begin{equation}\label{eq:Dk-large-outer}
+m^*(D_k)>1.
+\end{equation}
+Also $D_k\subseteq[-N,N]$, so
+\begin{equation}\label{eq:Dk-finite-outer}
+m^*(D_k)<\infty.
+\end{equation}
+
+For $M>N$,
+\[
+\nu(C_M)\le\nu([-M,M])=2M<\infty.
+\]
+By \eqref{eq:CN-to-infinity}, let $M>N$ be large enough that $\nu(C_M)>k$.
+
+If $x\in D_k$, then $\nu(C\setminus B_x)\le k$ by \eqref{eq:definition-of-Dk}.
+Since $C_M$ has finite $\nu$-measure and $C_M\setminus B_x\subseteq C\setminus B_x$, we have
+\begin{equation}\label{eq:vertical-lower-section}
+\nu(B_x\cap C_M)
+=
+\nu(C_M)-\nu(C_M\setminus B_x)
+\ge
+\nu(C_M)-k,
+\qquad
+\forall x\in D_k.
+\end{equation}
+
+Let
+\[
+H=\{(x,y)\in D_k\times C_M:x\in A_y\}\subseteq\R^2.
+\]
+For $x\in\R$,
+\[
+H_x=
+\begin{cases}
+B_x\cap C_M, & x\in D_k,\\
+\varnothing, & x\notin D_k.
+\end{cases}
+\]
+Thus \eqref{eq:vertical-lower-section} implies
+\[
+\nu(H_x)\ge(\nu(C_M)-k)1_{D_k}(x)
+\qquad(x\in\R).
+\]
+By monotonicity of upper integral and the identity
+\[
+\overline{\int_\R} a1_S\,dm=a\,m^*(S)
+\qquad(a\ge0,
+\ S\subseteq\R),
+\]
+we get
+\begin{equation}\label{eq:left-lower}
+\overline{\int_\R}\nu(H_x)\,dm(x)
+\ge
+(\nu(C_M)-k)m^*(D_k).
+\end{equation}
+
+For $y\in\R$,
+\[
+H^y=
+\begin{cases}
+A_y\cap D_k, & y\in C_M,\\
+\varnothing, & y\notin C_M.
+\end{cases}
+\]
+Since $m^*(A_y)<1$ for every $y$,
+\[
+m^*(H^y)
+\le
+1_{C_M}(y)
+\qquad(y\in\R).
+\]
+The function $y\mapsto m^*(H^y)$ is $\nu$-measurable because $\nu$ is defined on all subsets of $\R$.
+Hence
+\begin{equation}\label{eq:right-upper}
+\int_\R m^*(H^y)\,d\nu(y)
+\le
+\int_\R 1_{C_M}(y)\,d\nu(y)
+=
+\nu(C_M).
+\end{equation}
+
+Applying \eqref{eq:section-inequality} to this $H$ and using \eqref{eq:left-lower} and \eqref{eq:right-upper}, we obtain
+\[
+(\nu(C_M)-k)m^*(D_k)
+\le
+\nu(C_M).
+\]
+Dividing by $\nu(C_M)>0$ gives
+\[
+\left(1-\frac{k}{\nu(C_M)}\right)m^*(D_k)
+\le
+1.
+\]
+Letting $M\to\infty$ through integers greater than $N$ and using \eqref{eq:CN-to-infinity}, together with \eqref{eq:Dk-finite-outer}, yields $m^*(D_k)\le1$.
+This contradicts \eqref{eq:Dk-large-outer}.
+Therefore \eqref{eq:contrary} is false, and some $x\in C$ satisfies $\nu(C\setminus B_x)=\infty$.
+This proves Lemma \ref{lem:key-selection}.
+
+\appendix
+
+\section{Counterexample Under CH}\label{sec:ch-counterexample}
+
+For completeness, we give a simple proof that $P$ fails under $\CH$.
+Assume $\CH$, and fix an enumeration $\R=\{r_\alpha:\alpha<\omega_1\}$.
+Let $\preceq$ be the induced well-ordering of $\R$, so that $r_\alpha\preceq r_\beta$ if and only if $\alpha\le\beta$, and let $\prec$ be the corresponding strict order.
+For every $\beta<\omega_1$, the set $\{r_\alpha:\alpha<\beta\}$ is countable.
+For $y=r_\beta$, define
+\[
+A_y
+=
+\{r_\alpha:\alpha<\beta,\ |r_\alpha|\le |y|+1\}.
+\]
+Then $A_y$ is countable, and hence $m^*(A_y)=0$.
+Also $A_y\subseteq[-(|y|+1),|y|+1]$, so $A_y$ is bounded.
+
+We claim that the family $(A_y)_{y\in\R}$ has no infinite independent set.
+Suppose otherwise, and let $X\subseteq\R$ be infinite and independent.
+Choose a strictly increasing sequence
+\[
+x_0\prec x_1\prec x_2\prec\cdots
+\]
+from $X$.
+If $i<j$, then independence gives $x_i\notin A_{x_j}$.
+Since $x_i\prec x_j$, the definition of $A_{x_j}$ implies
+\[
+|x_i|>|x_j|+1.
+\]
+In particular, $|x_n|>|x_{n+1}|+1$ for every $n<\omega$.
+Iterating, we get $|x_n|<|x_0|-n$, which is impossible for $n>|x_0|$.
+Therefore no infinite independent set exists, and $P$ fails under $\CH$.
+
+\section*{Use of AI}
+
+During the preparation of this work, the author used OpenAI's GPT-5.5 Pro to explore possible proof strategies and to obtain the main methodological ideas behind the argument.
+After using this tool, the author independently verified the mathematical details, refined the exposition, and takes full responsibility for the final manuscript.
+
+\begin{thebibliography}{99}
+
+\bibitem{ErdosProblems501}
+T. F. Bloom,
+Erd\H{o}s Problem \#501,
+\url{https://www.erdosproblems.com/501},
+accessed 29 May 2026.
+
+\bibitem{ErdosHajnal1960}
+P. Erd\H{o}s and A. Hajnal,
+Some remarks on set theory. VIII,
+\emph{Michigan Math. J.} \textbf{7} (1960), 187--191.
+
+\bibitem{FremlinVol5Ch54}
+D. H. Fremlin,
+\emph{Measure Theory}, Vol. 5, Chapter 54, Real-valued-measurable cardinals,
+version of 23 October 2014 / 17 September 2016,
+\url{https://www1.essex.ac.uk/maths/people/fremlin/chap54.pdf}.
+
+\bibitem{FremlinVol5Ch51}
+D. H. Fremlin,
+\emph{Measure Theory}, Vol. 5, Chapter 51, Cardinal functions,
+version of 9 January 2015,
+\url{https://www1.essex.ac.uk/maths/people/fremlin/chap51.pdf}.
+
+\bibitem{FremlinVol4Ch41}
+D. H. Fremlin,
+\emph{Measure Theory}, Vol. 4, Chapter 41, Topologies and measures I,
+version of 14 December 2006,
+\url{https://www1.essex.ac.uk/maths/people/fremlin/chap41.pdf}.
+
+\bibitem{FremlinRVM}
+D. H. Fremlin,
+\emph{Real-valued-measurable cardinals},
+version of 19 September 2009,
+\url{https://www1.essex.ac.uk/maths/people/fremlin/rvmc.pdf}.
+
+\bibitem{Hechler1972}
+S. H. Hechler,
+On two problems in combinatorial set theory,
+\emph{Bull. Acad. Polon. Sci. S\'er. Sci. Math. Astronom. Phys.} \textbf{20} (1972), 429--431.
+
+\bibitem{NPS1987}
+L. Newelski, J. Pawlikowski, and W. Seredy\'nski,
+Infinite free set for small measure set mappings,
+\emph{Proc. Amer. Math. Soc.} \textbf{100} (1987), 335--339.
+
+\end{thebibliography}
+
+
+\end{document}
