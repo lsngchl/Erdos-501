@@ -6,8 +6,9 @@ The note proves that, assuming the existence of an extension of Lebesgue measure
 
 ## Files
 
-- `2026-05-30_Erdos501.tex`: LaTeX source.
-- `main.pdf`: compiled PDF.
+- `2026-MM-DD_Erdos501.tex`: LaTeX sources.
+- `main.pdf`: Uses Fremlin 543C, Kunen's theorem, to obtain the key section inequality.
+- `main-v2.pdf`: Proves the needed section inequality directly by an elementary argument.
 
 ## Status
 
