@@ -1,0 +1,466 @@
+% This file was assembled from main.tex and manuscript inputs.
+% Generated on 2026-06-01.
+
+\documentclass{amsart}
+
+%\usepackage[a4paper,margin=30mm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage[colorlinks=true,citecolor=blue,urlcolor=blue]{hyperref}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Pc}{\mathcal{P}}
+\newcommand{\ZFC}{\mathsf{ZFC}}
+\newcommand{\FMEA}{\mathsf{FMEA}}
+\newcommand{\CH}{\mathsf{CH}}
+\newcommand{\Con}{\operatorname{Con}}
+
+\title{Relative Independence of Erd\H{o}s Problem \#501}
+\author{Sungchul Lee}
+\date{\today}
+
+\begin{document}
+
+\begin{abstract}
+We prove a strengthening of the positive assertion in Erd\H{o}s problem \#501 assuming that Lebesgue measure extends to a measure on all subsets of $\R$.
+Together with Hechler's counterexample under the continuum hypothesis, this gives a relative independence result for Erd\H{o}s problem \#501, relative to the consistency of this extension hypothesis, and hence relative to the consistency of a measurable cardinal.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $m$ denote Lebesgue measure on $\R$, and let $m^*$ denote Lebesgue outer measure.
+Erd\H{o}s problem \#501 \cite{ErdosProblems501} asks whether every family $(A_x)_{x\in\R}$ of bounded subsets of $\R$ with $m^*(A_x)<1$ admits an infinite independent set, that is, an infinite set $X\subset\R$ such that $x\notin A_y$ whenever $x,y\in X$ are distinct.
+We write $P$ for the affirmative answer to this question.
+
+Erd\H{o}s and Hajnal \cite{ErdosHajnal1960} proved the existence of arbitrarily large finite independent sets.
+Hechler \cite{Hechler1972} proved $\neg P$ under the assumption $\CH$.
+Newelski, Pawlikowski, and Seredy\'nski \cite{NPS1987} proved that if all sets $A_y$ are closed and have measure $<1$, then there is an infinite independent set.
+However, it remained open whether $\neg P$ can be proved without assuming $\CH$.
+
+Let $\FMEA$ denote the Full Measure Extension Axiom, the assertion that Lebesgue measure has an extension to a countably additive measure on all subsets of $\R$.
+Our main result is the following.
+
+\begin{theorem}\label{thm:main}
+Assume $\ZFC+\FMEA$.
+Every family $(A_y)_{y\in\R}$ of subsets of $\R$ with Lebesgue outer measure $<1$ admits an infinite independent set.
+\end{theorem}
+
+Note that Theorem \ref{thm:main} does not assume boundedness.
+Hence Theorem \ref{thm:main} implies $P$ under $\FMEA$.
+$\FMEA$ is equiconsistent with the existence of a measurable cardinal; see \cite[1D(e), 2E]{FremlinRVM}.
+Combining Theorem \ref{thm:main} with Hechler's theorem gives the following consequence.
+
+\begin{corollary}\label{cor:relative-independence}
+If $\Con(\ZFC+\FMEA)$ holds, then $P$ is independent of $\ZFC$.
+In particular, if $\ZFC$ with a measurable cardinal is consistent, then $P$ is independent of $\ZFC$.
+\end{corollary}
+
+The key ingredient of the proof is Lemma \ref{lem:direct-section-inequality}, which gives a Fubini-type estimate for arbitrary subsets of $\R^2$.
+This makes it possible to handle arbitrary sets $A_y$.
+
+\subsection*{Notation}
+
+For a set $X$, we write $\Pc(X)$ to denote its power set.
+$\R^{<\omega}$ denotes the set of all finite sequences of real numbers; a sequence $s\in\R^{<\omega}$ of length $n$ is a function from $\{0,\ldots,n-1\}$ to $\R$.
+
+\section{Proof of the Main Theorem}\label{sec:main-theorem-proof}
+
+This section proves Theorem \ref{thm:main} from Lemma \ref{lem:key-selection}.
+We first state Lemma \ref{lem:key-selection}, postponing its proof to a later section, and then show how Theorem \ref{thm:main} follows from it.
+
+If $\nu:\Pc(\R)\to[0,\infty]$ is a measure extending Lebesgue measure, then every set $S\subset\R$ satisfies
+\begin{equation}\label{eq:outer-measure-domination}
+\nu(S)\le m^*(S).
+\end{equation}
+Indeed, this follows by covering $S$ by countably many open intervals and taking the infimum over all such covers.
+In particular, if $m^*(S)<1$, then $\nu(S)<1$.
+
+For a family $(A_y)_{y\in\R}$ of subsets of $\R$, write $B_x=\{y\in\R:x\in A_y\}$ for $x\in\R$.
+
+\begin{lemma}\label{lem:key-selection}
+Let $\nu:\Pc(\R)\to[0,\infty]$ be a measure extending Lebesgue measure.
+Let $(A_y)_{y\in\R}$ be a family of subsets of $\R$ such that $m^*(A_y)<1$ for every $y\in\R$.
+If $C\subset\R$ and $\nu(C)=\infty$, then there is an $x\in C$ such that $\nu(C\setminus B_x)=\infty$.
+\end{lemma}
+
+\begin{proof}[Proof of Theorem \ref{thm:main}]
+Assume $\FMEA$, and fix a measure $\nu:\Pc(\R)\to[0,\infty]$ extending Lebesgue measure.
+Let $(A_y)_{y\in\R}$ satisfy $m^*(A_y)<1$ for every $y\in\R$.
+Fix a well-ordering $\preceq$ of $\R$ and a point $r_0\in\R$.
+
+For a finite sequence $s\in\R^{<\omega}$, define
+\begin{equation}\label{eq:definition-of-Cs}
+C_s
+=
+\R\setminus\bigcup_{i<|s|}\left(A_{s(i)}\cup B_{s(i)}\cup\{s(i)\}\right),
+\end{equation}
+where $|s|$ denotes the length of $s$.
+Let
+\begin{equation}\label{eq:definition-of-Qs}
+Q_s
+=
+\{a\in C_s:\nu(C_s\setminus B_a)=\infty\}.
+\end{equation}
+Define $G:\R^{<\omega}\to\R$ by
+\[
+G(s)=
+\begin{cases}
+\text{the $\preceq$-least element of $Q_s$}, & Q_s\ne\varnothing,\\
+r_0, & Q_s=\varnothing.
+\end{cases}
+\]
+We write $f\upharpoonright n$ for the restriction of $f$ to $\{0,\ldots,n-1\}$.
+By recursion on $\omega$, there exists $f:\omega\to\R$ such that
+\[
+f(n)=G(f\upharpoonright n)
+\qquad(n<\omega).
+\]
+
+We prove by induction that
+\[
+\nu(C_{f\upharpoonright n})=\infty
+\qquad(n<\omega).
+\]
+For $n=0$, $f\upharpoonright 0$ is the empty sequence, so $C_{f\upharpoonright 0}=\R$ and $\nu(C_{f\upharpoonright 0})=\infty$.
+Suppose $\nu(C_{f\upharpoonright n})=\infty$.
+Lemma \ref{lem:key-selection} applied to $C_{f\upharpoonright n}$ and \eqref{eq:definition-of-Qs} show that $Q_{f\upharpoonright n}$ is nonempty.
+Hence $f(n)=G(f\upharpoonright n)$ belongs to $C_{f\upharpoonright n}$ and satisfies
+\[
+\nu(C_{f\upharpoonright n}\setminus B_{f(n)})=\infty.
+\]
+Moreover, by \eqref{eq:definition-of-Cs},
+\[
+C_{f\upharpoonright(n+1)}
+=
+C_{f\upharpoonright n}\setminus\left(A_{f(n)}\cup B_{f(n)}\cup\{f(n)\}\right)
+=
+(C_{f\upharpoonright n}\setminus B_{f(n)})\setminus\left(A_{f(n)}\cup\{f(n)\}\right).
+\]
+By \eqref{eq:outer-measure-domination},
+\[
+\nu(A_{f(n)})\le m^*(A_{f(n)})<1,
+\]
+and $\nu(\{f(n)\})=0$ because $\nu$ extends Lebesgue measure.
+Thus $\nu(A_{f(n)}\cup\{f(n)\})<\infty$.
+Since $\nu(C_{f\upharpoonright n}\setminus B_{f(n)})=\infty$ and $\nu(A_{f(n)}\cup\{f(n)\})<\infty$, we have $\nu(C_{f\upharpoonright(n+1)})=\infty$.
+This completes the induction.
+
+Set $X=\{f(n):n<\omega\}$.
+Let $i<j$.
+By \eqref{eq:definition-of-Cs},
+\[
+f(j)\in C_{f\upharpoonright j}\subset C_{f\upharpoonright(i+1)}
+=C_{f\upharpoonright i}\setminus\left(A_{f(i)}\cup B_{f(i)}\cup\{f(i)\}\right),
+\]
+we have $f(j)\ne f(i)$, $f(j)\notin A_{f(i)}$, and $f(j)\notin B_{f(i)}$.
+The last relation is equivalent to $f(i)\notin A_{f(j)}$.
+Thus $X$ is infinite, and $x\notin A_y$ for all distinct $x,y\in X$.
+\end{proof}
+
+\section{Proof of Lemma \ref{lem:key-selection}}\label{sec:key-selection}
+
+We use the following elementary section inequality.
+Here $\overline{\int_\R} g\,dm$ denotes the Lebesgue upper integral; that is, for $g:\R\to[0,\infty]$,
+\begin{equation}\label{eq:upper-integral-definition}
+\overline{\int_\R} g\,dm
+=
+\inf\left\{\int_\R h\,dm:g\le h,\ h\text{ is Lebesgue measurable}\right\}.
+\end{equation}
+
+\begin{lemma}\label{lem:direct-section-inequality}
+Let $(Y,\Pc(Y),\nu)$ be a $\sigma$-finite measure space.
+For every set $H\subset\R\times Y$,
+\begin{equation}\label{eq:direct-section-inequality}
+\overline{\int_\R}\nu(H_x)\,dm(x)
+\le
+\int_Y m^*(H^y)\,d\nu(y),
+\end{equation}
+where
+\begin{equation}\label{eq:section-notation}
+H_x=\{y\in Y:(x,y)\in H\},
+\qquad
+H^y=\{x\in\R:(x,y)\in H\}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Since $\nu$ is $\sigma$-finite, there is a $\nu$-measurable function $\eta:Y\to(0,\infty)$ such that
+\begin{equation}\label{eq:eta-integral-bound}
+\int_Y \eta\,d\nu
+\le
+1.
+\end{equation}
+Fix $\varepsilon>0$.
+For each $y\in Y$, choose an open set $U_y\subset\R$ such that
+\begin{equation}\label{eq:choice-of-Uy}
+H^y\subset U_y
+\qquad\text{and}\qquad
+m(U_y)\le m^*(H^y)+\varepsilon\eta(y).
+\end{equation}
+If $m^*(H^y)=\infty$, we may simply take $U_y=\R$.
+
+Let $(I_n)_{n<\omega}$ be a countable base for the usual topology of $\R$, for instance the open intervals with rational endpoints.
+For each $n<\omega$, define
+\[
+Y_n=\{y\in Y:I_n\subset U_y\}.
+\]
+Each $Y_n$ is $\nu$-measurable, because the $\sigma$-algebra on $Y$ is $\Pc(Y)$.
+Set
+\[
+E=\bigcup_{n<\omega}(I_n\times Y_n).
+\]
+Then $E$ is measurable in the product of the Lebesgue $\sigma$-algebra on $\R$ and $\Pc(Y)$.
+
+We claim that $E^y=U_y$ for every $y\in Y$.
+Indeed, if $x\in E^y$, then $x\in I_n$ for some $n$ with $I_n\subset U_y$, so $x\in U_y$.
+Conversely, if $x\in U_y$, then, since $U_y$ is open, there is a basic interval $I_n$ such that $x\in I_n\subset U_y$.
+Thus $y\in Y_n$, and hence $x\in E^y$.
+
+Therefore $H\subset E$.
+By Tonelli's theorem applied to the measurable set $E$,
+\begin{equation}\label{eq:tonelli-for-E}
+\int_\R \nu(E_x)\,dm(x)
+=
+\int_Y m(E^y)\,d\nu(y)
+=
+\int_Y m(U_y)\,d\nu(y).
+\end{equation}
+By \eqref{eq:eta-integral-bound} and \eqref{eq:choice-of-Uy},
+\begin{equation}\label{eq:Uy-integral-bound}
+\int_Y m(U_y)\,d\nu(y)
+\le
+\int_Y m^*(H^y)\,d\nu(y)+\varepsilon\int_Y \eta\,d\nu
+\le
+\int_Y m^*(H^y)\,d\nu(y)+\varepsilon.
+\end{equation}
+Since $H_x\subset E_x$ for every $x\in\R$, we have $\nu(H_x)\le\nu(E_x)$.
+Moreover, $x\mapsto\nu(E_x)$ is Lebesgue measurable.
+Hence, by \eqref{eq:upper-integral-definition}, \eqref{eq:tonelli-for-E}, and \eqref{eq:Uy-integral-bound},
+\[
+\overline{\int_\R}\nu(H_x)\,dm(x)
+\le
+\int_\R \nu(E_x)\,dm(x)
+\le
+\int_Y m^*(H^y)\,d\nu(y)+\varepsilon.
+\]
+Letting $\varepsilon\to0$ gives \eqref{eq:direct-section-inequality}.
+\end{proof}
+
+For the measure $\nu$ in Lemma \ref{lem:key-selection}, $(\R,\Pc(\R),\nu)$ is $\sigma$-finite, since
+\[
+\R=\bigcup_{n\ge1}[-n,n]
+\qquad\text{and}\qquad
+\nu([-n,n])=2n<\infty.
+\]
+Applying Lemma \ref{lem:direct-section-inequality} with $Y=\R$, we get, for every $H\subset\R^2$,
+\begin{equation}\label{eq:section-inequality}
+\overline{\int_\R}\nu(H_x)\,dm(x)
+\le
+\int_\R m^*(H^y)\,d\nu(y),
+\end{equation}
+where $H_x$ and $H^y$ are as in \eqref{eq:section-notation}, with $Y=\R$.
+
+\begin{proof}[Proof of Lemma \ref{lem:key-selection}]
+Let $C\subset\R$ satisfy $\nu(C)=\infty$.
+Suppose, toward a contradiction, that
+\begin{equation}\label{eq:contrary}
+\nu(C\setminus B_x)<\infty,
+\qquad
+\forall x\in C.
+\end{equation}
+
+For $N\ge1$, put $C_N=C\cap[-N,N]$.
+Since $C=\bigcup_{N\ge1}C_N$ and the sequence $(C_N)_{N\ge1}$ is increasing, continuity from below gives
+\begin{equation}\label{eq:CN-to-infinity}
+\nu(C_N)\longrightarrow\infty.
+\end{equation}
+Choose $N$ such that $D:=C\cap[-N,N]$ satisfies $\nu(D)>1$.
+For $k\ge1$, define
+\begin{equation}\label{eq:definition-of-Dk}
+D_k=\{x\in D:\nu(C\setminus B_x)\le k\}.
+\end{equation}
+By \eqref{eq:contrary}, $D=\bigcup_{k\ge1}D_k$, and the sequence $(D_k)_{k\ge1}$ is increasing.
+Again by continuity from below, there is $k\ge1$ such that $\nu(D_k)>1$.
+By \eqref{eq:outer-measure-domination} and $D_k\subset[-N,N]$,
+\begin{equation}\label{eq:Dk-outer-bounds}
+1<m^*(D_k)<\infty.
+\end{equation}
+
+For every integer $M>N$,
+\[
+\nu(C_M)\le\nu([-M,M])=2M<\infty.
+\]
+By \eqref{eq:CN-to-infinity} and \eqref{eq:Dk-outer-bounds}, choose an integer $M>N$ such that
+\begin{equation}\label{eq:choice-of-M}
+\nu(C_M)>\frac{k\,m^*(D_k)}{m^*(D_k)-1}.
+\end{equation}
+In particular, $\nu(C_M)>k$.
+
+If $x\in D_k$, then $\nu(C\setminus B_x)\le k$ by \eqref{eq:definition-of-Dk}.
+Since $C_M$ has finite $\nu$-measure and $C_M\setminus B_x\subset C\setminus B_x$, we have
+\begin{equation}\label{eq:vertical-lower-section}
+\nu(B_x\cap C_M)
+=
+\nu(C_M)-\nu(C_M\setminus B_x)
+\ge
+\nu(C_M)-k,
+\qquad
+\forall x\in D_k.
+\end{equation}
+
+Let
+\[
+H=\{(x,y)\in D_k\times C_M:x\in A_y\}\subset\R^2.
+\]
+For $x\in\R$,
+\[
+H_x=
+\begin{cases}
+B_x\cap C_M, & x\in D_k,\\
+\varnothing, & x\notin D_k.
+\end{cases}
+\]
+Thus \eqref{eq:vertical-lower-section} implies
+\[
+\nu(H_x)\ge(\nu(C_M)-k)1_{D_k}(x)
+\qquad(x\in\R).
+\]
+By monotonicity of upper integral and the identity
+\[
+\overline{\int_\R} a1_S\,dm=a\,m^*(S)
+\qquad(a\ge0,
+\ S\subset\R),
+\]
+we get
+\begin{equation}\label{eq:left-lower}
+\overline{\int_\R}\nu(H_x)\,dm(x)
+\ge
+(\nu(C_M)-k)m^*(D_k).
+\end{equation}
+
+For $y\in\R$,
+\[
+H^y=
+\begin{cases}
+A_y\cap D_k, & y\in C_M,\\
+\varnothing, & y\notin C_M.
+\end{cases}
+\]
+Since $m^*(A_y)<1$ for every $y$,
+\[
+m^*(H^y)
+\le
+1_{C_M}(y)
+\qquad(y\in\R).
+\]
+The function $y\mapsto m^*(H^y)$ is $\nu$-measurable because $\nu$ is defined on all subsets of $\R$.
+Hence
+\begin{equation}\label{eq:right-upper}
+\int_\R m^*(H^y)\,d\nu(y)
+\le
+\int_\R 1_{C_M}(y)\,d\nu(y)
+=
+\nu(C_M).
+\end{equation}
+
+Applying \eqref{eq:section-inequality} to this $H$ and using \eqref{eq:left-lower} and \eqref{eq:right-upper}, we obtain
+\[
+(\nu(C_M)-k)m^*(D_k)
+\le
+\nu(C_M).
+\]
+Dividing by $\nu(C_M)>0$ gives
+\[
+\left(1-\frac{k}{\nu(C_M)}\right)m^*(D_k)
+\le
+1.
+\]
+However, \eqref{eq:choice-of-M} gives
+\[
+\left(1-\frac{k}{\nu(C_M)}\right)m^*(D_k)>1,
+\]
+contradicting the preceding inequality.
+Therefore \eqref{eq:contrary} is false, and some $x\in C$ satisfies $\nu(C\setminus B_x)=\infty$.
+\end{proof}
+
+\appendix
+
+\section{Counterexample Under CH}\label{sec:ch-counterexample}
+
+For completeness, we give a simple proof that $P$ fails under $\CH$.
+Assume $\CH$, and fix an enumeration $\R=\{r_\alpha:\alpha<\omega_1\}$.
+Let $\preceq$ be the induced well-ordering of $\R$, so that $r_\alpha\preceq r_\beta$ if and only if $\alpha\le\beta$, and let $\prec$ be the corresponding strict order.
+For every $\beta<\omega_1$, the set $\{r_\alpha:\alpha<\beta\}$ is countable.
+For $y=r_\beta$, define
+\[
+A_y
+=
+\{r_\alpha:\alpha<\beta,\ |r_\alpha|\le |y|+1\}.
+\]
+Then $A_y$ is countable, and hence $m^*(A_y)=0$.
+Also $A_y\subset[-(|y|+1),|y|+1]$, so $A_y$ is bounded.
+
+We claim that the family $(A_y)_{y\in\R}$ has no infinite independent set.
+Suppose otherwise, and let $X\subset\R$ be infinite and independent.
+Choose a strictly increasing sequence
+\[
+x_0\prec x_1\prec x_2\prec\cdots
+\]
+from $X$.
+If $i<j$, then independence gives $x_i\notin A_{x_j}$.
+Since $x_i\prec x_j$, the definition of $A_{x_j}$ implies
+\[
+|x_i|>|x_j|+1.
+\]
+In particular, $|x_n|>|x_{n+1}|+1$ for every $n<\omega$.
+Iterating, we get $|x_n|<|x_0|-n$, which is impossible for $n>|x_0|$.
+Therefore no infinite independent set exists, and $P$ fails under $\CH$.
+
+\section*{Use of AI}
+
+During the preparation of this work, the author used OpenAI's GPT-5.5 Pro to explore possible proof strategies and to obtain the main methodological ideas behind the argument.
+After using this tool, the author independently verified the mathematical details, refined the exposition, and takes full responsibility for the final manuscript.
+
+
+\begin{thebibliography}{1}
+
+\bibitem{ErdosProblems501}
+T.~F. Bloom.
+\newblock {Erd\H{o}s Problem \#501}.
+\newblock Accessed 29 May 2026.
+\newblock URL: \url{https://www.erdosproblems.com/501}.
+
+\bibitem{ErdosHajnal1960}
+P.~Erd\H{o}s and A.~Hajnal.
+\newblock Some remarks on set theory. {VIII}.
+\newblock {\em Michigan Math. J.}, 7:187--191, 1960.
+
+\bibitem{FremlinRVM}
+D.~H. Fremlin.
+\newblock Real-valued-measurable cardinals.
+\newblock Version of 19 September 2009.
+\newblock URL: \url{https://www1.essex.ac.uk/maths/people/fremlin/rvmc.pdf}.
+
+\bibitem{Hechler1972}
+S.~H. Hechler.
+\newblock On two problems in combinatorial set theory.
+\newblock {\em Bull. Acad. Polon. Sci. S\'er. Sci. Math. Astronom. Phys.}, 20:429--431, 1972.
+
+\bibitem{NPS1987}
+L.~Newelski, J.~Pawlikowski, and W.~Seredy\'nski.
+\newblock Infinite free set for small measure set mappings.
+\newblock {\em Proc. Amer. Math. Soc.}, 100:335--339, 1987.
+
+\end{thebibliography}
+
+
+\end{document}
